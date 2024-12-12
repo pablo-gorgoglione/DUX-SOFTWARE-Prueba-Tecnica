@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.UUID;
 
 @MappedSuperclass
@@ -22,26 +22,26 @@ public class BaseEntity {
         return UUID.randomUUID().toString().replace("-", "");
     }
 
-//    public void ensureExternalId() {
-//        setExternalId(externalId == null ? generateExternalId() : externalId);
-//    }
+    public void ensureExternalId() {
+        setExternalId(externalId == null ? generateExternalId() : externalId);
+    }
 
     @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
+    private Date createdAt;
 
     @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    private Date updatedAt;
 
     @Column(name = "deleted_at")
-    private LocalDateTime deletedAt;
+    private Date deletedAt;
 
     @PrePersist
     protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
+        this.createdAt = new Date();
     }
 
     @PreUpdate
     protected void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
+        this.updatedAt = new Date();
     }
 }

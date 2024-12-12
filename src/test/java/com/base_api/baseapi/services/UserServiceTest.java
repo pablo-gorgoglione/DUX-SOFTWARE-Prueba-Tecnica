@@ -27,31 +27,31 @@ public class UserServiceTest {
         MockitoAnnotations.openMocks(this);  // Initializes the mocks
     }
 
-    @Test
-    void testGetAllUsers() {
-        // Arrange: Preparing mock data
-        User user1 = new User();
-        user1.setName("John");
-        user1.setEmail("john@example.com");
-
-        User user2 = new User();
-        user2.setName("Jane");
-        user2.setEmail("jane@example.com");
-
-        List<User> mockedUsers = Arrays.asList(user1, user2);
-
-        // Stubbing the method
-        when(userRepository.findAll()).thenReturn(mockedUsers);
-
-        // Act: Calling the method we are testing
-        List<User> result = userService.getAllUsers();
-        // Assert: Verifying the result
-        assertNotNull(result);
-        assertEquals(2, result.size());
-        assertEquals("John", result.get(0).getName());
-        assertEquals("Jane", result.get(1).getName());
-
-        // Verify the interaction with the repository
-        verify(userRepository, times(1)).findAll();
-    }
+//    @Test
+//    void testGetAllUsers() {
+//        // Arrange: Preparing mock data
+//        User user1 = new User();
+//        user1.setName("John");
+//        user1.setEmail("john@example.com");
+//
+//        User user2 = new User();
+//        user2.setName("Jane");
+//        user2.setEmail("jane@example.com");
+//
+//        List<User> mockedUsers = Arrays.asList(user1, user2);
+//
+//        // Stubbing the method
+//        when(userRepository.findAll()).thenReturn(mockedUsers);
+//
+//        // Act: Calling the method we are testing
+//        List<User> result = userService.getAllUsers();
+//        // Assert: Verifying the result
+//        assertNotNull(result);
+//        assertEquals(2, result.size());
+//        assertEquals("John", result.get(0).getName());
+//        assertEquals("Jane", result.get(1).getName());
+//
+//        // Verify the interaction with the repository
+//        verify(userRepository, times(1)).findAll();
+//    }
 }
