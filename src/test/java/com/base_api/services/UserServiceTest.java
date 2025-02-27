@@ -40,7 +40,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void testFindAll(){
+    void testFindAll() {
         UserRegistrationDTO dto = new UserRegistrationDTO();
         dto.setName("Pablo");
         dto.setEmail("pablo@example.com");
@@ -59,7 +59,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void testLogin(){
+    void testLogin() {
         UserRegistrationDTO dtoRegistration = new UserRegistrationDTO();
         dtoRegistration.setName("Pablo");
         dtoRegistration.setEmail("pablo@example.com");
@@ -77,7 +77,6 @@ public class UserServiceTest {
 
         Assertions.assertEquals(registeredUser.getId(), loggedUser.getId());
     }
-
 
 
 }

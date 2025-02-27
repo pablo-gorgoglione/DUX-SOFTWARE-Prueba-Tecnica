@@ -10,42 +10,41 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class ResponseDTO<T> {
-  private static final String SUCCESS = "success";
+    private static final String SUCCESS = "success";
+    boolean success;
+    @NonNull
+    private String message;
+    private T content;
+    private Enum errorCode;
 
-  @NonNull
-  private String message;
-  private T content;
-  private Enum errorCode;
-  boolean success;
+    private ResponseDTO(String message, T content) {
+        this.errorCode = null;
+        this.success = true;
+        this.message = message;
+        this.content = content;
+    }
 
-  private ResponseDTO(String message, T content) {
-    this.errorCode = null;
-    this.success = true;
-    this.message = message;
-    this.content = content;
-  }
+    private ResponseDTO(String message, Enum errorCode) {
+        this(message, errorCode, null, false);
+    }
 
-  private ResponseDTO(String message, Enum errorCode) {
-    this(message, errorCode, null, false);
-  }
+    private ResponseDTO(String message, Enum errorCode, T content, boolean success) {
+        this.message = message;
+        this.errorCode = errorCode;
+        this.content = content;
+        this.success = success;
+    }
 
-  private ResponseDTO(String message, Enum errorCode, T content, boolean success) {
-    this.message = message;
-    this.errorCode = errorCode;
-    this.content = content;
-    this.success = success;
-  }
+    public static ResponseDTO<String> ofSuccess() {
+        return new ResponseDTO<>(SUCCESS, "");
+    }
 
-  public static ResponseDTO<String> ofSuccess() {
-    return new ResponseDTO<>(SUCCESS, "");
-  }
+    public static ResponseDTO<String> ofSuccess(String message) {
+        return new ResponseDTO<>(SUCCESS, message);
+    }
 
-  public static ResponseDTO<String> ofSuccess(String message) {
-    return new ResponseDTO<>(SUCCESS, message);
-  }
-
-  public static <T> ResponseDTO<T> ofError(String message) {
-    return new ResponseDTO<>(message, ErrorCode.GENERIC_ERROR);
-  }
+    public static <T> ResponseDTO<T> ofError(String message) {
+        return new ResponseDTO<>(message, ErrorCode.GENERIC_ERROR);
+    }
 
 }

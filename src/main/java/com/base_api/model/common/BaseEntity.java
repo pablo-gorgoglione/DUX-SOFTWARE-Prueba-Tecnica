@@ -11,12 +11,17 @@ import java.util.UUID;
 @Getter
 @Setter
 public class BaseEntity {
+    @Column(unique = true, name = "external_id")
+    protected String externalId;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
-
-    @Column(unique = true, name = "external_id")
-    protected String externalId;
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private Date createdAt;
+    @Column(name = "updated_at")
+    private Date updatedAt;
+    @Column(name = "deleted_at")
+    private Date deletedAt;
 
     public static String generateExternalId() {
         return UUID.randomUUID().toString().replace("-", "");
@@ -25,15 +30,6 @@ public class BaseEntity {
     public void ensureExternalId() {
         setExternalId(externalId == null ? generateExternalId() : externalId);
     }
-
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private Date createdAt;
-
-    @Column(name = "updated_at")
-    private Date updatedAt;
-
-    @Column(name = "deleted_at")
-    private Date deletedAt;
 
     @PrePersist
     protected void onCreate() {
