@@ -23,21 +23,21 @@ public class Configuration {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                    .allowedOriginPatterns("http://localhost:*", "https://example.com")
-                    .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                    .allowedHeaders("*")
-                    .allowCredentials(true);
+                        .allowedOriginPatterns("http://localhost:*", "https://example.com")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedHeaders("*")
+                        .allowCredentials(true);
             }
         };
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable()) // Deshabilita CSRF
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/user/login", "/api/user/register").permitAll() // Rutas públicas
-                .anyRequest().authenticated() // Todas las demás requieren autenticación
-            );
+        http.csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/user/login", "/api/user/register").permitAll()
+                        .anyRequest().authenticated()
+                );
         return http.build();
     }
 }

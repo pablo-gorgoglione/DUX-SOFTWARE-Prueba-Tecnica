@@ -2,6 +2,7 @@ package com.base_api.controllers;
 
 import com.base_api.dto.user.UserLoginDTO;
 import com.base_api.dto.user.UserRegistrationDTO;
+import com.base_api.model.common.ResponseDTO;
 import com.base_api.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,21 +21,15 @@ public class UserController {
   }
 
   @PostMapping("/register")
-  public ResponseEntity<String> register(@RequestBody UserRegistrationDTO dto) {
-    try {
-      userService.register(dto);
-      return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully.");
-    } catch (Exception e) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Registration failed: " + e.getMessage());
-    }
+  public ResponseEntity<ResponseDTO<String>> register(@RequestBody UserRegistrationDTO dto) {
+    userService.register(dto);
+    return ResponseEntity.ok(ResponseDTO.ofSuccess("User registered successfully."));
   }
 
   @PostMapping("/login")
-  public ResponseEntity<String> login(@RequestBody UserLoginDTO dto) {
-    boolean logged = userService.login(dto);
-    return logged
-        ? ResponseEntity.status(HttpStatus.CREATED).body("User logged successfully.")
-        : ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Login failed");
+  public ResponseEntity<ResponseDTO<String>> login(@RequestBody UserLoginDTO dto) {
+    userService.login(dto);
+    return ResponseEntity.ok(ResponseDTO.ofSuccess("User logged successfully."));
   }
 
 }
