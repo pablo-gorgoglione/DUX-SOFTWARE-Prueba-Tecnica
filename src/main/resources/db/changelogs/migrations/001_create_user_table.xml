@@ -5,38 +5,30 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <!-- Crear tabla 'user' con columnas correspondientes -->
     <changeSet id="001_create_user_table" author="Pablo Gorgoglione">
         <createTable tableName="user">
-            <!-- Columna id (auto incrementable) -->
             <column name="id" type="bigint" autoIncrement="true" >
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
-            <!-- Columna external_id (único) -->
             <column name="external_id" type="varchar(64)">
                 <constraints nullable="false" unique="true"/>
             </column>
 
-            <!-- Columna name -->
             <column name="name" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
 
-            <!-- Columna email -->
             <column name="email" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
 
-            <!-- Columna created_at -->
             <column name="created_at" type="datetime">
                 <constraints nullable="false"/>
             </column>
 
-            <!-- Columna updated_at -->
             <column name="updated_at" type="datetime"/>
 
-            <!-- Columna deleted_at -->
             <column name="deleted_at" type="datetime"/>
         </createTable>
     </changeSet>

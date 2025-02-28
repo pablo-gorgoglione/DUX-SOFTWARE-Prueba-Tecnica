@@ -5,8 +5,8 @@ import com.base_api.dto.user.UserRegistrationDTO;
 import com.base_api.model.User;
 import com.base_api.repositories.UserRepository;
 import com.base_api.services.security.PasswordEncryptionService;
+import com.base_api.utils.JwtUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,9 +18,9 @@ public class UserService {
     private final PasswordEncryptionService passwordEncryptionService;
     private final BCryptPasswordEncoder passwordEncoder;
 
+
     public UserService(
             UserRepository userRepository, PasswordEncryptionService passwordEncryptionService,
-            PasswordEncoder passwordEncoder,
             BCryptPasswordEncoder passwordEncoder1) {
         this.userRepository = userRepository;
         this.passwordEncryptionService = passwordEncryptionService;
@@ -34,10 +34,13 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User login(UserLoginDTO dto) {
-        return userRepository.findByEmail(dto.getEmail()).filter(
+    public String login(UserLoginDTO dto) {
+
+        User loggedUser = userRepository.findByEmail(dto.getEmail()).filter(
                         user -> passwordEncoder.matches(dto.getPassword(), user.getHashedPassword()))
                 .orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
+
+        return JwtUtils.generateToken(loggedUser.getEmail(), loggedUser.getExternalId());
     }
 
     public List<User> findAll() {

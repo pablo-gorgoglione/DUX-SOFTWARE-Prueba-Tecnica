@@ -4,6 +4,7 @@ import com.base_api.dto.user.UserLoginDTO;
 import com.base_api.dto.user.UserRegistrationDTO;
 import com.base_api.model.User;
 import com.base_api.repositories.UserRepository;
+import com.base_api.utils.JwtUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,10 +73,10 @@ public class UserServiceTest {
         dtoLogin.setEmail(dtoRegistration.getEmail());
         dtoLogin.setPassword(dtoRegistration.getPassword());
 
-        User loggedUser = userService.login(dtoLogin);
-        Assertions.assertNotNull(loggedUser);
-
-        Assertions.assertEquals(registeredUser.getId(), loggedUser.getId());
+        String token = userService.login(dtoLogin);
+        Assertions.assertNotNull(token);
+        String tokenUserExternalId = JwtUtils.extractUserExternalId(token);
+        Assertions.assertEquals(registeredUser.getExternalId(), tokenUserExternalId);
     }
 
 
