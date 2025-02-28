@@ -1,6 +1,5 @@
 package com.base_api.utils;
 
-import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
