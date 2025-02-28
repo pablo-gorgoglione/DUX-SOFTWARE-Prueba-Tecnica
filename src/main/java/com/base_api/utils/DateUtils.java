@@ -16,7 +16,7 @@ public class DateUtils {
     }
 
     public static Date addWeeks(Date date, int weeks) {
-        Instant instant = date.toInstant().plus(Duration.ofDays(weeks * 7));
+        Instant instant = date.toInstant().plus(Duration.ofDays(weeks * 7L));
         return Date.from(instant);
     }
 
