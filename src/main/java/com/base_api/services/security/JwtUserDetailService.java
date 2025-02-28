@@ -1,4 +1,4 @@
-package com.base_api.services;
+package com.base_api.services.security;
 
 import com.base_api.repositories.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
