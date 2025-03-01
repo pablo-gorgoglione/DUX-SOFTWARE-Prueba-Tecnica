@@ -3,7 +3,6 @@ package com.base_api.model.common;
 import com.base_api.types.ErrorCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.Setter;
 
 @Getter
@@ -12,10 +11,9 @@ import lombok.Setter;
 public class ResponseDTO<T> {
     private static final String SUCCESS = "success";
     boolean success;
-    @NonNull
     private String message;
     private T content;
-    private Enum errorCode;
+    private ErrorCode errorCode;
 
     private ResponseDTO(String message, T content) {
         this.errorCode = null;
@@ -24,11 +22,11 @@ public class ResponseDTO<T> {
         this.content = content;
     }
 
-    private ResponseDTO(String message, Enum errorCode) {
+    private ResponseDTO(String message, ErrorCode errorCode) {
         this(message, errorCode, null, false);
     }
 
-    private ResponseDTO(String message, Enum errorCode, T content, boolean success) {
+    private ResponseDTO(String message, ErrorCode errorCode, T content, boolean success) {
         this.message = message;
         this.errorCode = errorCode;
         this.content = content;

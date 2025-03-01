@@ -5,15 +5,15 @@ meta {
 }
 
 post {
-  url: http://localhost:8080/api/user/login
+  url: {{test-api-url}}/auth/login
   body: json
   auth: none
 }
 
 body:json {
   {
-    "email":"test002@test.com",
-    "password":"password"
+    "username":"test",
+    "password":"12345"
   }
 }
 

@@ -17,7 +17,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(InvalidLoginException.class)
     public ResponseEntity<ResponseDTO<String>> handleInvalidLoginException(InvalidLoginException e) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ResponseDTO.ofError(e.getMessage()));
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
     }
 
 }

@@ -12,5 +12,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UserDTO extends PublicDTO {
     String name;
-    String email;
+    String username;
 }

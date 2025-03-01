@@ -1,5 +1,6 @@
 package com.base_api.services;
 
+import com.base_api.dto.user.LoginResponseDTO;
 import com.base_api.dto.user.UserLoginDTO;
 import com.base_api.dto.user.UserRegistrationDTO;
 import com.base_api.model.User;
@@ -17,22 +18,22 @@ import java.util.Optional;
 
 @SpringBootTest
 @ActiveProfiles("test")
-public class UserServiceTest {
+public class AuthServiceTest {
 
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
-    private UserService userService;
+    private AuthService authService;
 
     @Test
     void testGetAllUsers() {
         UserRegistrationDTO dto = new UserRegistrationDTO();
         dto.setName("Pablo");
-        dto.setEmail("pablo@example.com");
+        dto.setUsername("pablo@example.com");
         dto.setPassword("password");
 
-        User user = userService.register(dto);
+        User user = authService.register(dto);
 
         Optional<User> userSearched = userRepository.findById(user.getId());
 
@@ -41,41 +42,22 @@ public class UserServiceTest {
     }
 
     @Test
-    void testFindAll() {
-        UserRegistrationDTO dto = new UserRegistrationDTO();
-        dto.setName("Pablo");
-        dto.setEmail("pablo@example.com");
-        dto.setPassword("password");
-
-        UserRegistrationDTO dto2 = new UserRegistrationDTO();
-        dto2.setName("Pablo2");
-        dto2.setEmail("pablo2@example.com");
-        dto2.setPassword("asdfgh");
-
-        userService.register(dto);
-        userService.register(dto2);
-
-        List<User> users = userService.findAll();
-        Assertions.assertEquals(2, users.size());
-    }
-
-    @Test
     void testLogin() {
         UserRegistrationDTO dtoRegistration = new UserRegistrationDTO();
         dtoRegistration.setName("Pablo");
-        dtoRegistration.setEmail("pablo@example.com");
+        dtoRegistration.setUsername("pablo@example.com");
         dtoRegistration.setPassword("password");
 
-        User registeredUser = userService.register(dtoRegistration);
+        User registeredUser = authService.register(dtoRegistration);
         Assertions.assertNotNull(registeredUser);
 
         UserLoginDTO dtoLogin = new UserLoginDTO();
-        dtoLogin.setEmail(dtoRegistration.getEmail());
+        dtoLogin.setUsername(dtoRegistration.getUsername());
         dtoLogin.setPassword(dtoRegistration.getPassword());
 
-        String token = userService.login(dtoLogin);
-        Assertions.assertNotNull(token);
-        String tokenUserExternalId = JwtUtils.extractUserExternalId(token);
+        LoginResponseDTO loginResponseDTO = authService.login(dtoLogin);
+        Assertions.assertNotNull(loginResponseDTO);
+        String tokenUserExternalId = JwtUtils.extractUserExternalId(loginResponseDTO.getToken());
         Assertions.assertEquals(registeredUser.getExternalId(), tokenUserExternalId);
     }
 

@@ -19,9 +19,9 @@ public class JwtUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return userRepository.findByEmail(email)
+        return userRepository.findByUsername(email)
                 .map(user -> new org.springframework.security.core.userdetails.User(
-                        user.getEmail(),
+                        user.getUsername(),
                         user.getHashedPassword(),
                         Collections.emptyList()
                 ))
@@ -31,7 +31,7 @@ public class JwtUserDetailService implements UserDetailsService {
     public UserDetails loadByUserExternalId(String userExternalId) throws UsernameNotFoundException {
         return userRepository.findByExternalId(userExternalId)
                 .map(user -> new org.springframework.security.core.userdetails.User(
-                        user.getEmail(),
+                        user.getUsername(),
                         user.getHashedPassword(),
                         Collections.emptyList()
                 ))
