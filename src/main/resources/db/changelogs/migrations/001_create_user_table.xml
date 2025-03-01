@@ -19,17 +19,17 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="email" type="varchar(255)">
+            <column name="username" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <column name="created_at" type="timestamp">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="created_at" type="datetime">
-                <constraints nullable="false"/>
-            </column>
+            <column name="updated_at" type="timestamp"/>
 
-            <column name="updated_at" type="datetime"/>
-
-            <column name="deleted_at" type="datetime"/>
+            <column name="deleted_at" type="timestamp"/>
         </createTable>
     </changeSet>
 
