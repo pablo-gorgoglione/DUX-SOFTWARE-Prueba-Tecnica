@@ -3,7 +3,6 @@ package com.base_api.controllers;
 import com.base_api.dto.user.LoginResponseDTO;
 import com.base_api.dto.user.UserLoginDTO;
 import com.base_api.dto.user.UserRegistrationDTO;
-import com.base_api.model.common.ResponseDTO;
 import com.base_api.services.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +17,9 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<ResponseDTO<String>> register(@RequestBody UserRegistrationDTO dto) {
+    public ResponseEntity<String> register(@RequestBody UserRegistrationDTO dto) {
         authService.register(dto);
-        return ResponseEntity.ok(ResponseDTO.ofSuccess("User registered successfully."));
+        return ResponseEntity.ok("User registered successfully.");
     }
 
     @PostMapping("/login")
