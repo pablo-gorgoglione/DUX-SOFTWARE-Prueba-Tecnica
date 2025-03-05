@@ -44,7 +44,11 @@ Si deseas ejecutar la aplicación localmente sin usar Docker, sigue estos pasos:
 
    La aplicación estará disponible en `http://localhost:8080`.
 
+## Ejecución de pruebas
 
+ ```bash
+   mvn test
+   ```
 
 ## Acceso a la documentación de la API
 
