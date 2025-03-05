@@ -3,6 +3,8 @@ package com.base_api.controllers;
 import com.base_api.dto.EquipoDTO;
 import com.base_api.model.Equipo;
 import com.base_api.services.EquipoService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,8 +35,8 @@ private final EquipoService equipoService;
     }
 
     @PostMapping
-    public ResponseEntity<Equipo> create(@RequestBody EquipoDTO equipo) {
-        return ResponseEntity.ok(equipoService.create(equipo));
+    public ResponseEntity<Equipo> create(@Valid @RequestBody EquipoDTO equipo) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(equipoService.create(equipo));
     }
 
     @PutMapping("/{id}")
