@@ -165,7 +165,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"liga\": \"Nueva Liga\",\r\n  \"pais\": \"Nuevo País\"\r\n}\r\n",
+							"raw": "{\r\n  \"nombre\": \"new team\",\r\n  \"liga\": \"new Liga\",\r\n  \"pais\": \"new País\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -209,13 +209,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{base-url}}/equipos/133",
+							"raw": "{{base-url}}/equipos/1",
 							"host": [
 								"{{base-url}}"
 							],
 							"path": [
 								"equipos",
-								"133"
+								"1"
 							]
 						}
 					},

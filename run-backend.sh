@@ -1,10 +1,9 @@
 #!/bin/bash
 
-CONTAINER_NAME="base-api-container"
-IMAGE_NAME="base-api"
+IMAGE_NAME="dux-software-prueba-tecnica"
 
-docker rm -f $CONTAINER_NAME 2>/dev/null
+docker rm -f IMAGE_NAME 2>/dev/null
 
 docker build -t $IMAGE_NAME .
 
-docker run -p 8080:8080 --name $CONTAINER_NAME $IMAGE_NAME
+docker run -p 8080:8080 --name $IMAGE_NAME $IMAGE_NAME
