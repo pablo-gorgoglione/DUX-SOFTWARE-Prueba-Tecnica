@@ -1,0 +1,311 @@
+{
+	"info": {
+		"_postman_id": "0b1ac2fb-bd15-4a39-9478-003859949876",
+		"name": "dux-challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15776255",
+		"_collection_link": "https://restless-station-516201.postman.co/workspace/My-Workspace~8c5a4ac6-d83e-4324-864a-1b984b9d4e38/collection/15776255-0b1ac2fb-bd15-4a39-9478-003859949876?action=share&source=collection_link&creator=15776255"
+	},
+	"item": [
+		{
+			"name": "auth controller",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"if (response.token) {\r",
+									"    const jwt = response.token;\r",
+									"    pm.globals.set('jwt-token', jwt);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"test\",\r\n    \"password\":\"12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/auth/login",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "equipo controller",
+			"item": [
+				{
+					"name": "find by id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/equipos/1",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"equipos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search by name",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/equipos/buscar?nombre=ga",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"equipos",
+								"buscar"
+							],
+							"query": [
+								{
+									"key": "nombre",
+									"value": "ga"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiaWF0IjoxNzQwODU2ODA4LCJleHAiOjE3NDE0NjE2MDgsImp0aSI6ImFlNjE0NjIyYTc4MDQzNzQ5MGE5NDQ3NDM5NzdlNzcwIn0.TVL7d5xme-E4Ot6hf-j_dwZB70YDrF9aJIPRrDiRr8o",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"liga\": \"Nueva Liga\",\r\n  \"pais\": \"Nuevo País\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/equipos",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"equipos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"updated team\",\r\n  \"liga\": \"updated Liga\",\r\n  \"pais\": \"updated País\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/equipos/133",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"equipos",
+								"133"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/equipos/2",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"equipos",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/equipos",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"equipos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base-url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
