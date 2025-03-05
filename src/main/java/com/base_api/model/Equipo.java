@@ -24,6 +24,12 @@ public class Equipo {
     private String liga;
     private String pais;
 
+    public Equipo(String nombre, String pais, String liga) {
+        this.nombre = nombre;
+        this.pais = pais;
+        this.liga = liga;
+    }
+
     public static Equipo of(EquipoDTO dto){
         Equipo equipo = new Equipo();
         equipo.setNombre(dto.getNombre());
