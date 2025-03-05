@@ -14,6 +14,8 @@ Para ejecutar la aplicación, puedes usar el siguiente script:
 ```bash
 ./run-backend.sh
 ```
+Este script construye y ejecuta la aplicación, que estará disponible en el puerto **8080**.
+
 ### Alternativa: Ejecución Local (sin Docker)
 
 Si deseas ejecutar la aplicación localmente sin usar Docker, sigue estos pasos:
@@ -40,8 +42,6 @@ Si deseas ejecutar la aplicación localmente sin usar Docker, sigue estos pasos:
 
    La aplicación estará disponible en `http://localhost:8080`.
 
----
-Este script construye y ejecuta la aplicación, que estará disponible en el puerto **8080**.
 
 
 ## Acceso a la documentación de la API
@@ -49,3 +49,9 @@ Este script construye y ejecuta la aplicación, que estará disponible en el pue
 Una vez que la aplicación esté en funcionamiento, puedes acceder a la documentación interactiva de la API a través de Swagger UI en la siguiente URL:
 
 [http://localhost:8080/swagger-ui/index.html#/](http://localhost:8080/swagger-ui/index.html#/)
+
+## Colección de Postman
+
+Adjunto la colección de Postman que puedes utilizar para probar la API de la aplicación. La colección contiene los endpoints principales, incluyendo autenticación y CRUD de equipos.
+
+[Descargar colección de Postman](https://github.com/pablo-gorgoglione/test-api/blob/aa368adeb6de98a2d8306b2ed681c85ab14f4240/dux-challenge.postman_collection.json)
