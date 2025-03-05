@@ -40,7 +40,7 @@ private final EquipoService equipoService;
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Equipo> update(@RequestBody EquipoDTO equipo, @PathVariable(name = "id") Long id) {
+    public ResponseEntity<Equipo> update(@Valid @RequestBody EquipoDTO equipo, @PathVariable(name = "id") Long id) {
         return ResponseEntity.ok(equipoService.update(equipo, id));
     }
 
