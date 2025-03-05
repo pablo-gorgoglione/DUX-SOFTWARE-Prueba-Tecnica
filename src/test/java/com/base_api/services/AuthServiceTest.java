@@ -1,5 +1,6 @@
 package com.base_api.services;
 
+
 import com.base_api.dto.user.LoginResponseDTO;
 import com.base_api.dto.user.UserLoginDTO;
 import com.base_api.dto.user.UserRegistrationDTO;
@@ -14,7 +15,6 @@ import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Optional;
 
-
 @SpringBootTest
 @ActiveProfiles("test")
 public class AuthServiceTest {
@@ -27,9 +27,10 @@ public class AuthServiceTest {
 
     @Test
     void testGetAllUsers() {
+        userRepository.deleteAll();
         UserRegistrationDTO dto = new UserRegistrationDTO();
         dto.setName("Pablo");
-        dto.setUsername("pablo@example.com");
+        dto.setUsername("pablo1@example.com");
         dto.setPassword("password");
 
         User user = authService.register(dto);
@@ -42,23 +43,14 @@ public class AuthServiceTest {
 
     @Test
     void testLogin() {
-        UserRegistrationDTO dtoRegistration = new UserRegistrationDTO();
-        dtoRegistration.setName("test");
-        dtoRegistration.setUsername("test");
-        dtoRegistration.setPassword("12345");
-
-//        User registeredUser = authService.register(dtoRegistration);
-//        Assertions.assertNotNull(registeredUser);
-
         UserLoginDTO dtoLogin = new UserLoginDTO();
-        dtoLogin.setUsername(dtoRegistration.getUsername());
-        dtoLogin.setPassword(dtoRegistration.getPassword());
+        dtoLogin.setUsername("test");
+        dtoLogin.setPassword("12345");
 
         LoginResponseDTO loginResponseDTO = authService.login(dtoLogin);
         Assertions.assertNotNull(loginResponseDTO);
         String tokenUserExternalId = JwtUtils.extractUserExternalId(loginResponseDTO.getToken());
         Assertions.assertNotNull(tokenUserExternalId);
-//        Assertions.assertEquals(registeredUser.getExternalId(), tokenUserExternalId);
     }
 
 

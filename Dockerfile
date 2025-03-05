@@ -1,21 +1,17 @@
-# Usamos una imagen base con Java
-FROM eclipse-temurin:17-jdk AS builder
+FROM openjdk:17-jdk-slim
 
-# Configuramos el directorio de trabajo
+RUN apt-get update && apt-get install -y maven
+
 WORKDIR /app
 
-# Copiamos el código fuente y construimos el JAR
-COPY . .
-RUN ./mvnw package -DskipTests
+COPY pom.xml .
 
-# Creamos una imagen ligera para ejecutar el JAR
-FROM eclipse-temurin:17-jre
-WORKDIR /app
-COPY --from=builder /app/target/*.jar app.jar
+RUN mvn dependency:go-offline
 
-# Puerto en el que corre la app
+COPY src /app/src
+
+RUN mvn clean package
+
 EXPOSE 8080
 
-# Comando para ejecutar la aplicación
-ENTRYPOINT ["java", "-jar", "app.jar"]
-# docker run -d -p 8080:8080 --name mi-app mi-app-spring
+CMD ["java", "-jar", "target/base-api-0.0.1-SNAPSHOT.jar"]
