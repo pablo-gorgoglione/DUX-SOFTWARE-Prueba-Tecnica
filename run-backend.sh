@@ -2,7 +2,7 @@
 
 IMAGE_NAME="dux-software-prueba-tecnica"
 
-docker rm -f IMAGE_NAME 2>/dev/null
+docker rm -f $IMAGE_NAME 2>/dev/null
 
 docker build -t $IMAGE_NAME .
 
