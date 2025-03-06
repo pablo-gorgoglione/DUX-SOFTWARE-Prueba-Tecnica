@@ -11,6 +11,8 @@ Este proyecto contiene las funcionalidades básicas de una API RESTFUL incluyend
 
 Para ejecutar la aplicación, puedes usar el siguiente script:
 
+Nota: dar permisos de ejecucion con `chmod +x ./run-backend.sh`
+
 ```bash
 ./run-backend.sh
 ```
